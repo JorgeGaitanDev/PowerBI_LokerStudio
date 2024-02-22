@@ -1,0 +1,23 @@
+Tabla_Calendario = 
+ADDCOLUMNS(
+    CALENDAR(DATE(YEAR(MIN(VigenciasAnteriores[FechaVencimiento])),1,1),DATE(YEAR(MAX(VigenciasAnteriores[FechaVencimiento])),12,31)),
+
+    "#Año",YEAR([Date]),
+    "#Semestre",ROUNDUP(MONTH([Date])/6,0),
+    "#Cuatrimestre",ROUNDUP(MONTH([Date])/4,0),
+    "#Trimestre",ROUNDUP(MONTH([Date])/3,0),
+    "#Bimestre",ROUNDUP(MONTH([Date])/2,0),
+    "#Mes",MONTH([Date]),
+    "#Semana",WEEKNUM([Date],2),
+    "#Dia",WEEKDAY([Date],2),
+
+    "Semestre","Sem." & ROUNDUP(MONTH([Date])/6,0),
+    "Cuatrimestre","Cuatri."  & ROUNDUP(MONTH([Date])/4,0),
+    "Trimestre","Trim." & ROUNDUP(MONTH([Date])/3,0),
+    "Bimestre","Bim." & ROUNDUP(MONTH([Date])/2,0),
+    "Mes", UPPER(LEFT(FORMAT([Date], "MMMM"), 1)) & LOWER(RIGHT(FORMAT([Date], "MMMM"), LEN(FORMAT([Date], "MMMM")) - 1)),
+    "Mes_Corto", UPPER(LEFT(FORMAT([Date], "MMMM"), 1)) & LOWER(RIGHT(LEFT(FORMAT([Date], "MMMM"), 3), 2)) & ".",
+    "Dia", UPPER(LEFT(FORMAT([Date], "DDDD"), 1)) & LOWER(RIGHT(FORMAT([Date],"DDDD"), LEN(FORMAT([Date],"DDDD")) -1)),
+    "Dia_Corto", UPPER(LEFT(FORMAT([Date], "DDD"), 1)) & LOWER(RIGHT(LEFT(FORMAT([Date], "DDD"), 3), 2)) & "."
+
+)
